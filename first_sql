@@ -1,0 +1,32 @@
+# from pickle import EMPTY_LIST
+import sqlite3
+
+# create empty database
+connection = sqlite3.connect("Employees.db")
+
+# communicate with the database
+cursor = connection.cursor()
+
+# save changes immediatley
+connection.commit()
+
+#EXPLICITLY CREATED tuple for the database
+e_list = [
+    ("Joe", "Schmo", "js@mail.com"),
+    ("abe", "Lincoin","Al@mail.com")
+]
+
+# connection.commit()
+# print specific rows from the Employee table
+print("******************************")
+
+#take user input and format it using sql
+def user_input():
+    empName = str(input("Enter name: "))
+    empLastName = str(input('Enter the employee\'s last name: '))
+    empEmail = str(input("Enter the employee\'s email: "))
+    cursor.execute('INSERT INTO Employees(f_Name, l_name, eMail) VALUES(?, ?, ?)', (empName,empLastName,empEmail))
+    connection.commit()
+user_input()
+connection.close()
+
